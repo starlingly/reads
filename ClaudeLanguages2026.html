@@ -17,44 +17,65 @@
       This page requires JavaScript to display.
     </div>
   </noscript>
+  <!-- AI COPY BUTTON START -->
+  <script>
+    window.onload = function() {
+      // Create the floating container
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.top = '20px';
+      container.style.left = '20px';
+      container.style.zIndex = '99999';
+
+      // Create the copy button
+      const button = document.createElement('button');
+      button.id = 'aiCopyBtn';
+      button.innerText = '📋 Copy Markdown for AI';
+      button.style.padding = '10px 16px';
+      button.style.fontSize = '14px';
+      button.style.background = '#ffffff';
+      button.style.color = '#333333';
+      button.style.border = '1px solid #cccccc';
+      button.style.borderRadius = '8px';
+      button.style.cursor = 'pointer';
+      button.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+      button.style.fontFamily = '-apple-system, BlinkMacSystemFont, sans-serif';
+      button.style.fontWeight = '500';
+
+      // Add click copy functionality
+      button.addEventListener('click', async function() {
+        const rawMdUrl = 'https://githubusercontent.com';
+        button.innerText = '⏳ Fetching text...';
+        button.disabled = true;
+
+        try {
+          const response = await fetch(rawMdUrl);
+          if (!response.ok) throw new Error('Network error');
+          const text = await response.text();
+          
+          await navigator.clipboard.writeText(text);
+          button.innerText = 'Copied! 🎉';
+        } catch (err) {
+          button.innerText = '❌ Error copying';
+          console.error(err);
+        }
+
+        setTimeout(() => {
+          button.innerText = '📋 Copy Markdown for AI';
+          button.disabled = false;
+        }, 2000);
+      });
+
+      // Inject button into the webpage after loading completes
+      container.appendChild(button);
+      document.body.appendChild(container);
+    };
+  </script>
+  <!-- AI COPY BUTTON END -->
+
 </head>
 <body>
 <body>
-
-  <!-- AI COPY BUTTON START -->
-  <div style="position: fixed; top: 20px; left: 20px; z-index: 10001;">
-    <button id="aiCopyBtn" style="padding: 10px 16px; font-size: 14px; background: #ffffff; color: #333333; border: 1px solid #cccccc; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-family: inherit; font-weight: 500;">
-      📋 Copy Markdown for AI
-    </button>
-  </div>
-
-  <script>
-    document.getElementById('aiCopyBtn').addEventListener('click', async function() {
-      const button = this;
-      const rawMdUrl = 'https://githubusercontent.com';
-      
-      button.innerText = '⏳ Fetching text...';
-      button.disabled = true;
-
-      try {
-        const response = await fetch(rawMdUrl);
-        if (!response.ok) throw new Error('Network error');
-        const text = await response.text();
-        
-        await navigator.clipboard.writeText(text);
-        button.innerText = 'Copied! 🎉';
-      } catch (err) {
-        button.innerText = '❌ Error copying';
-        console.error(err);
-      }
-
-      setTimeout(() => {
-        button.innerText = '📋 Copy Markdown for AI';
-        button.disabled = false;
-      }, 2000);
-    });
-  </script>
-  <!-- AI COPY BUTTON END -->
   <div id="__bundler_thumbnail">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
     <rect x="180" y="300" width="360" height="90" rx="18" fill="#4A44AB"></rect>
