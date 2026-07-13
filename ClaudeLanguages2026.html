@@ -44,12 +44,13 @@
 
       // Add click copy functionality
       button.addEventListener('click', async function() {
-        const rawMdUrl = 'https://githubusercontent.com';
+        // CHANGED: Using local directory routing to bypass GitHub security restrictions
+        const localMdUrl = './ClaudeLanguages2026.md';
         button.innerText = '⏳ Fetching text...';
         button.disabled = true;
 
         try {
-          const response = await fetch(rawMdUrl);
+          const response = await fetch(localMdUrl);
           if (!response.ok) throw new Error('Network error');
           const text = await response.text();
           
